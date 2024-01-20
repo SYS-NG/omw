@@ -15384,6 +15384,7 @@ __metadata:
     eslint: "npm:^8.21.0"
     node-gyp: "npm:^9.3.1"
     prettier: "npm:^2.7.1"
+    react-native-image-picker: "npm:^7.1.0"
     turbo: "npm:^1.10.3"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -16630,6 +16631,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: b83590b50a113fae6afcee580f5019c29b6a7da144dd8c11ea8676ec580a5dc5776d595d88745989da5918669279f577cd2cd8ae02d43ea04a0d34efc6a1553b
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^7.1.0":
+  version: 7.1.0
+  resolution: "react-native-image-picker@npm:7.1.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: e8dd2ae04cf620f7d7c29e6ee7a0f959ba4f76ee7f8e2244e5809cebc82558e03790682df57ced1a8dad272ecc0cc2446e5d26cad0381432d1b428c5955416e0
   languageName: node
   linkType: hard
 

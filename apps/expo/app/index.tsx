@@ -1,15 +1,6 @@
-import { HomeScreen } from 'app/features/home/screen'
-import { Stack } from 'expo-router'
+import { Redirect } from 'expo-router'
 
-export default function Screen() {
-  return (
-    <>
-      <Stack.Screen
-        options={{
-          title: 'Home',
-        }}
-      />
-      <HomeScreen />
-    </>
-  )
+const Index = () => {
+  return <Redirect href="/task" />
 }
+export default Index
