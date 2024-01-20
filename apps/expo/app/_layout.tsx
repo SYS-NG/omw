@@ -33,11 +33,11 @@ export default function HomeLayout() {
             tabBarIcon: ({ focused, size }) => {
               let iconName
               if (route.name === 'task') {
-                iconName = focused ? 'ios-stats-chart' : 'ios-stats-chart-outline'
+                iconName = focused ? 'checkmark-circle' : 'checkmark-circle-outline'
               } else if (route.name === 'therapist') {
-                iconName = focused ? 'ios-log-in' : 'ios-log-in-outline'
+                iconName = focused ? 'ios-man' : 'ios-man-outline'
               } else if (route.name === 'ai-chat') {
-                iconName = focused ? 'ios-settings' : 'ios-settings-outline'
+                iconName = focused ? 'chatbox' : 'chatbox-outline'
               } else if (route.name === 'settings') {
                 iconName = focused ? 'ios-list' : 'ios-list-outline'
               }
@@ -61,9 +61,9 @@ export default function HomeLayout() {
               scheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background,
           })}
         >
-          <Tabs.Screen name="task" options={{ title: 'Task', href: '/task' }} />
+          <Tabs.Screen name="task" options={{ title: 'Tasks', href: '/task' }} />
           <Tabs.Screen name="therapist" options={{ title: 'Therapist', href: '/therapist' }} />
-          <Tabs.Screen name="ai-chat" options={{ title: 'AI Chat', href: '/ai-chat' }} />
+          <Tabs.Screen name="ai-chat" options={{ title: 'OMW AI', href: '/ai-chat' }} />
           <Tabs.Screen name="settings" options={{ title: 'Settings', href: '/settings' }} />
           <Tabs.Screen name="user/[id]" options={{ title: 'User', href: null }} />
           <Tabs.Screen name="splash" options={{ title: 'Splash', href: null }} />
