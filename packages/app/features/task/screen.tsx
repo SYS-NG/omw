@@ -79,12 +79,13 @@ export function TaskScreen() {
   }
 
   const percentTaskDone = () => {
-    return Math.round(numSelected / allTasks.length * 100);
+    return Math.round(numSelected / allTasks.length * 100) > 100 
+    ? 100 
+    : Math.round(numSelected / allTasks.length * 100);
   }
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchAllTasks();
     setTimeout(() => {
       setRefreshing(false)
     }, 1000)
@@ -160,7 +161,7 @@ export function TaskScreen() {
           </YStack>
 
           <YStack p="$3" space>
-            <XStack style={{ backgroundColor: "#e6e6e6", width: "95%", marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto", padding: "5%" }} jc={'space-between'} alignItems={'center'} onPress={() => handleGoalPress()}>
+            <XStack bg={"#e6e6e6"} p={'5%'} jc={'space-between'} onPress={() => handleGoalPress()}>
               <Text fontSize={'$7'} fontWeight={'700'}>Managing your anger</Text>
               {goalSelected ? (<ChevronUp />) : (<ChevronDown />)}
             </XStack>
@@ -178,7 +179,7 @@ export function TaskScreen() {
             <Text fontSize={'$7'} fontWeight={'700'}>Task Overview</Text>
 
             <YStack p="$3" space >
-              <XStack style={{ width: "100%", margin: "0", paddingLeft: "1%", paddingRight: "1%" }} jc={'space-between'} alignItems={'center'} onPress={() => handleOngoPress()}>
+              <XStack paddingEnd={'1%'} paddingStart={'1%'} jc={'space-between'} onPress={() => handleOngoPress()}>
                 <Text fontSize={'$6'} fontWeight={'400'}>Ongoing</Text>
                 <XStack alignContent='center'>
                   <Text fontSize={'$6'} paddingRight="2%">{ongoTasks.length}</Text>
@@ -194,8 +195,8 @@ export function TaskScreen() {
               )}
             </YStack>
 
-            <YStack p="$3" space paddingTop="0" marginTop="0">
-              <XStack style={{ width: "100%", margin: "0", paddingLeft: "1%", paddingRight: "1%" }} jc={'space-between'} alignItems={'center'} onPress={() => handleCompPress()}>
+            <YStack p="$3" gap>
+              <XStack paddingEnd={'1%'} paddingStart={'1%'} jc={'space-between'} onPress={() => handleCompPress()}>
                 <Text fontSize={'$6'} fontWeight={'400'}>Completed</Text>
                 <XStack alignContent='center'>
                   <Text fontSize={'$6'} paddingRight="2%">{compTasks.length}</Text>
@@ -217,13 +218,12 @@ export function TaskScreen() {
   )
 }
 const TaskListNoCheckItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks }) => {
-  const [isSelected, setSelection] = useState(taskObj.done)
-  const color = isSelected ? '#99ccff' : '#e6e6e6';
+  const color = taskObj.done ? '#99ccff' : '#e6e6e6';
 
   return (
     <YGroup>
       <YGroup.Item>
-        <XStack style={{ backgroundColor: color, width: "92%", marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto", padding: "3.5%" }} jc={'space-between'} alignItems={'center'}>
+        <XStack bg={color} p={'3.5%'} jc={'space-between'}>
           <Text fontSize={'$5'} fontWeight={'600'}>
             {taskObj.task}
           </Text>
@@ -255,7 +255,7 @@ const TaskListItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getO
   return (
     <YGroup>
       <YGroup.Item>
-        <XStack style={{ backgroundColor: color, width: "92%", marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto", padding: "3.5%" }} jc={'space-between'} alignItems={'center'}>
+      <XStack bg={color} p={'3.5%'} jc={'space-between'}>
           <Text fontSize={'$5'} fontWeight={'600'}>
             {taskObj.task}
           </Text>
