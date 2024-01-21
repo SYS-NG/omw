@@ -21,7 +21,7 @@ import {
 import { useColorScheme, RefreshControl, StyleSheet, View } from 'react-native'
 import { useRouter } from 'solito/router'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
-import { ChevronRight, Search, X } from '@tamagui/lucide-icons'
+import { MessageCircle } from '@tamagui/lucide-icons'
 
 export type Article = {
   id: number
@@ -145,7 +145,10 @@ export function MoodScreen() {
             <Theme name="red">
               <Card bordered>
                 <Card.Header>
-                  <H2>Talk to your therapist</H2>
+                  <XStack space={'$2'}>
+                    <MessageCircle size={24} />
+                    <H2>Talk to your therapist</H2>
+                  </XStack>
                 </Card.Header>
                 {fetchAllArticles().map((article) => (
                   <Button size={'$8'} chromeless>
