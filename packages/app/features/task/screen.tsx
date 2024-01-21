@@ -1,77 +1,97 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useColorScheme, RefreshControl} from 'react-native'
+import { useColorScheme, RefreshControl, Image} from 'react-native'
 import CheckBox from 'expo-checkbox'
 import { DarkTheme, DefaultTheme } from '@react-navigation/native'
 import { useRouter } from 'solito/router'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { Input, Button, H2, H3, H4, H5, H6, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar } from '@my/ui'
-import { ChevronRight, Search, TrendingUp, X } from '@tamagui/lucide-icons'
-import { SvgXml } from 'react-native-svg';
+import { Input, Button, H2, H3, H4, H5, H6, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar, View } from '@my/ui'
+import { ChevronUp, ChevronDown, Search, TrendingUp, X } from '@tamagui/lucide-icons'
+import { SvgXml, Svg} from 'react-native-svg';
+import ProgressCircle from 'react-native-progress-circle'
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
 
 export type Task = {
   id: number
   task: string
+  done: boolean
 }
 
 export function TaskScreen() {
 
-  const [showSearchBar, setShowSearchBar] = useState(false)
+  const [numSelected, setNumSelected]    = useState(0)
+  const [goalSelected, setGoalSelection] = useState(false)
+  const [compSelected, setCompSelection] = useState(false)
+  const [ongoSelected, setOngoSelection] = useState(false)
+
   const [allTasks, setAllTasks] = useState<Task[]>([])
-  const [filteredTherapists, setFilteredTherapists] = useState<Task[]>([])
+  const [compTasks, setCompTasks] = useState<Task[]>([])
+  const [ongoTasks, setOngoTasks] = useState<Task[]>([])
+
   const [searchText, setSearchText] = useState('')
   const [refreshing, setRefreshing] = useState(false)
   const scheme = useColorScheme()
   const insets = useSafeAreaInsets()
 
-  const toggleShowSearchBar = () => {
-    if (showSearchBar) setSearchText('')
-    setShowSearchBar(!showSearchBar)
-  }
-  const filterTherapistsList = (searchText: string) => {
-    setSearchText(searchText)
-    const searchTerms = searchText.toLowerCase().split(' ')
-    setFilteredTherapists(
-      allTasks.filter((therapist) =>
-        searchTerms.every((searchTerm: string) =>
-          ['full_name', 'phone_number', 'email'].some((field) =>
-            therapist[field].toLowerCase().includes(searchTerm)
-          )
-        )
-      )
+  const getCompTasks = () => {
+    setCompTasks(
+      allTasks.filter((task) => Boolean(task.done))
     )
   }
 
-  const handleSearchBlur = () => {
-    if (!searchText) toggleShowSearchBar()
+
+  const getOngoTasks = () => {
+    setOngoTasks(
+      allTasks.filter((task) => Boolean(!task.done))
+    )
   }
-  const fetchAllTherapists = () => {
+
+  const handleGoalPress = () => {
+    setGoalSelection(!goalSelected);
+  }
+  const handleCompPress = () => {
+    setCompSelection(!compSelected);
+  }
+  const handleOngoPress = () => {
+    setOngoSelection(!ongoSelected);
+  }
+
+  const fetchAllTasks = () => {
     setAllTasks([
       {
         id: 1,
         task: 'Breathing Exercise for 3 mins',
+        done: false
       },
       {
         id: 2,
         task: 'Identify Triggers and Journal',
+        done: false
       },
       {
         id: 3,
         task: 'Use "I" Statements',
+        done: false
       },
     ])
+    getCompTasks();
+    getOngoTasks();
   }
 
+  const percentTaskDone = () => {
+    return Math.round(numSelected / allTasks.length * 100);
+  }
+ 
   const onRefresh = useCallback(() => {
-    setRefreshing(true)
-    fetchAllTherapists()
+    setRefreshing(true);
+    fetchAllTasks();
     setTimeout(() => {
       setRefreshing(false)
     }, 2000)
   }, [])
 
   useEffect(() => {
-    fetchAllTherapists()
+    fetchAllTasks();
   }, [])
 
   return (
@@ -112,8 +132,8 @@ export function TaskScreen() {
               <H4 paddingLeft="$2">Your Progress</H4>
             </XStack>
 
-            <XStack paddingTop="$4"
-              jc={'flex-start'}
+            <XStack paddingTop="$4" paddingRight="10%"
+              jc={'space-between'}
               pl={'$3'}
             >
               <YStack>
@@ -121,61 +141,124 @@ export function TaskScreen() {
                   <H3 color="#808080">Hello, </H3>
                   <H3>Steven</H3>
                 </XStack>
-                <H5>You are off to a good start!</H5>
+                <Text fontSize={'$5'} fontWeight={'300'} paddingTop={'5%'}>You are off to a good start!</Text>
               </YStack>
+              <ProgressCircle
+                percent={percentTaskDone()}
+                radius={35}
+                borderWidth={8}
+                color="#3399ff"
+              >
+                <Text>{percentTaskDone()}</Text>
+              </ProgressCircle>
             </XStack>
           </YStack>
 
-          <YStack p="$1" space>
-
-            <XStack style={{ backgroundColor:"#e6e6e6", width:"95%", marginTop:"0", marginBottom:"0", borderRadius:"25px", marginLeft:"auto", marginRight:"auto", padding:"5%"}} jc={'space-between'} alignItems={'center'}>
+          <YStack p="$3" space>
+            <XStack style={{ backgroundColor:"#e6e6e6", width:"95%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"5%"}} jc={'space-between'} alignItems={'center'} onPress={() => handleGoalPress()}>
               <Text fontSize={'$7'} fontWeight={'700'}>Managing your anger</Text>
-              <CheckBox
-                disabled={false}
-                value={false}
-              />
+              {goalSelected ? (<ChevronUp/>) : (<ChevronDown/>)}
             </XStack>
-            {searchText ? (
-              filteredTherapists.length > 0 ? (
-                filteredTherapists.map((therapistObj, index) => {
-                  return <TaskListItem key={therapistObj.id} taskObj={therapistObj} />
-                })
-              ) : (
-                <Paragraph ta="center">All done!</Paragraph>
-              )
-            ) : allTasks.length > 0 ? (
+            {goalSelected && allTasks.length > 0 ? (
               allTasks.map((taskObj, index) => {
-                return <TaskListItem key={taskObj.id} taskObj={taskObj} />
+                return <TaskListItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks} />
               })
             ) : (
               <Paragraph ta="center">You are doing Great!</Paragraph>
             )}
+          </YStack>
+
+          <YStack p="$3" space>
+
+            <Text fontSize={'$7'} fontWeight={'700'}>Task Overview</Text>
+            
+            <YStack p="$3" space >
+              <XStack style={{ width:"100%", margin:"0", paddingLeft:"1%", paddingRight:"1%"}} jc={'space-between'} alignItems={'center'} onPress={() => handleOngoPress()}>
+                <Text fontSize={'$6'} fontWeight={'400'}>Ongoing</Text>
+                <XStack alignContent='center'>
+                  <Text fontSize={'$6'} paddingRight="2%">{ongoTasks.length}</Text>
+                  {ongoSelected? (<ChevronUp/>) : (<ChevronDown/>)}
+                </XStack>
+              </XStack>
+              {ongoSelected && allTasks.length > 0 ? (
+                ongoTasks.map((taskObj, index) => {
+                  return <TaskListNoCheckItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks}/>
+                })
+              ) : (
+                <></>
+              )}
+            </YStack>
+
+            <YStack p="$3" space paddingTop="0" marginTop="0">
+              <XStack style={{ width:"100%", margin:"0", paddingLeft:"1%", paddingRight:"1%"}} jc={'space-between'} alignItems={'center'} onPress={() => handleCompPress()}>
+                <Text fontSize={'$6'} fontWeight={'400'}>Completed</Text>
+                <XStack alignContent='center'>
+                  <Text fontSize={'$6'} paddingRight="2%">{compTasks.length}</Text>
+                  {compSelected ? (<ChevronUp/>) : (<ChevronDown/>)}
+                </XStack>
+              </XStack>
+              {compSelected && allTasks.length > 0 ? (
+                compTasks.map((taskObj, index) => {
+                  return <TaskListNoCheckItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks}/>
+                })
+              ) : (
+                <></>
+              )}
+            </YStack>
           </YStack>
         </ScrollView>
       </YStack>
     </SafeAreaProvider>
   )
 }
+const TaskListNoCheckItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks}) => {
+  const [isSelected, setSelection] = useState(taskObj.done)
+  const color = isSelected ? '#99ccff' : '#e6e6e6';
+
+  return (
+    <YGroup>
+      <YGroup.Item>
+        <XStack style={{ backgroundColor:color, width:"92%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"3.5%"}} jc={'space-between'} alignItems={'center'}>
+          <Text fontSize={'$5'} fontWeight={'600'}>
+            {taskObj.task}
+          </Text>
+        </XStack>
+      </YGroup.Item>
+    </YGroup>
+  )
+}
+
+const TaskListItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks}) => {
+  const [isSelected, setSelection] = useState(taskObj.done)
 
 
-const TaskListItem = ({ taskObj }) => {
-  const [isSelected, setSelection] = useState(false)
-  const handleCheckSelect = (newValue) => {
+  const handleCheckSelect = (newValue, taskObj) => {
+    taskObj.done = newValue;
+    getCompTasks();
+    getOngoTasks();    
+
+
     setSelection(newValue);
+    if (newValue) {
+      setNumSelected(numSelected + 1);
+    } else {
+      setNumSelected(numSelected - 1);
+    }
+
   }
   const color = isSelected ? '#99ccff' : '#e6e6e6';
 
   return (
     <YGroup>
       <YGroup.Item>
-        <XStack style={{ backgroundColor:color, width:"95%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"3.5%"}} jc={'space-between'} alignItems={'center'}>
+        <XStack style={{ backgroundColor:color, width:"92%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"3.5%"}} jc={'space-between'} alignItems={'center'}>
           <Text fontSize={'$5'} fontWeight={'600'}>
             {taskObj.task}
           </Text>
           <CheckBox
             disabled={false}
             value={isSelected}
-            onValueChange={(newValue) => handleCheckSelect(newValue)}
+            onValueChange={(newValue) => handleCheckSelect(newValue, taskObj)}
           />
         </XStack>
       </YGroup.Item>
