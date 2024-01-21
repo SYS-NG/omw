@@ -10390,6 +10390,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-checkbox@npm:~2.4.0":
+  version: 2.4.0
+  resolution: "expo-checkbox@npm:2.4.0"
+  checksum: bc58d8c6cb0190fa11c548c48f39715d20d536f2f15f21c08e5bfe756eb42d73e4650ad0e371cac0fef73bf92286a4546678b557833020f9ee0a6327cf85eb1f
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~14.4.2":
   version: 14.4.2
   resolution: "expo-constants@npm:14.4.2"
@@ -15458,11 +15465,13 @@ __metadata:
     axios: "npm:^1.6.5"
     check-dependency-version-consistency: "npm:^3.0.3"
     eslint: "npm:^8.21.0"
+    expo-checkbox: "npm:~2.4.0"
     node-gyp: "npm:^9.3.1"
     prettier: "npm:^2.7.1"
     react-native-gifted-chat: "npm:^2.4.0"
     react-native-image-picker: "npm:^7.1.0"
     react-router-native: "npm:^6.21.3"
+    react-native-progress-circle: "npm:^2.1.0"
     turbo: "npm:^1.10.3"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -16789,6 +16798,17 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 0ce25087c4a1041441ba680b79bd994de86d77a73cc733ab22b26f21c36be238f510b32eecd79fc099575615fa8fad9f600a495391cdaaf7b84bc6342f04f27b
+  languageName: node
+  linkType: hard
+
+"react-native-progress-circle@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "react-native-progress-circle@npm:2.1.0"
+  peerDependencies:
+    prop-types: "*"
+    react: "*"
+    react-native: "*"
+  checksum: 4d6cd1e2240d160287e525efc2a17416fe1b04c735a9cac99c937458b42756f1f12a1732ae8c0178bf72793814e38fcb4d42eed394d50a3bc55c3b99570ad22a
   languageName: node
   linkType: hard
 
