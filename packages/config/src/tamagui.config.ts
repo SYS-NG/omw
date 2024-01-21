@@ -35,14 +35,14 @@ const headingFont = createInterFont({
     15: -6,
   },
   face: {
-    700: { normal: 'InterBold' },
+    700: { normal: 'Poppins_700Bold' },
   },
 })
 
 const bodyFont = createInterFont(
   {
     face: {
-      700: { normal: 'InterBold' },
+      700: { normal: 'Poppins_400Regular' },
     },
   },
   {

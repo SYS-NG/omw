@@ -6,7 +6,26 @@ import { SplashScreen } from 'expo-router'
 import { Tabs } from 'expo-router/tabs'
 import { useColorScheme } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { View } from '@my/ui'
+import {
+  Poppins_100Thin,
+  Poppins_100Thin_Italic,
+  Poppins_200ExtraLight,
+  Poppins_200ExtraLight_Italic,
+  Poppins_300Light,
+  Poppins_300Light_Italic,
+  Poppins_400Regular,
+  Poppins_400Regular_Italic,
+  Poppins_500Medium,
+  Poppins_500Medium_Italic,
+  Poppins_600SemiBold,
+  Poppins_600SemiBold_Italic,
+  Poppins_700Bold,
+  Poppins_700Bold_Italic,
+  Poppins_800ExtraBold,
+  Poppins_800ExtraBold_Italic,
+  Poppins_900Black,
+  Poppins_900Black_Italic,
+} from '@expo-google-fonts/poppins'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -14,6 +33,24 @@ export default function HomeLayout() {
   const [fontsLoaded, fontError] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+    Poppins_100Thin,
+    Poppins_100Thin_Italic,
+    Poppins_200ExtraLight,
+    Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    Poppins_800ExtraBold,
+    Poppins_800ExtraBold_Italic,
+    Poppins_900Black,
+    Poppins_900Black_Italic,
   })
   const scheme = useColorScheme()
   useEffect(() => {
@@ -56,21 +93,71 @@ export default function HomeLayout() {
               scheme === 'dark' ? DefaultTheme.colors.background : DarkTheme.colors.background,
           })}
         >
-          <Tabs.Screen name="task" options={{ title: 'Tasks', href: '/task' }} />
-          <Tabs.Screen name="therapist" options={{ title: 'Therapist', href: '/therapist' }} />
+          <Tabs.Screen
+            name="task"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'Tasks',
+              href: '/task',
+            }}
+          />
+          <Tabs.Screen
+            name="therapist"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'Therapist',
+              href: '/therapist',
+            }}
+          />
           <Tabs.Screen
             name="mood"
             options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
               title: 'Mood',
               href: '/mood',
             }}
           />
-          <Tabs.Screen name="ai-chat" options={{ title: 'OMW AI', href: '/ai-chat' }} />
-          <Tabs.Screen name="settings" options={{ title: 'Settings', href: '/settings' }} />
-          <Tabs.Screen name="user/[id]" options={{ title: 'User', href: null }} />
-          <Tabs.Screen name="splash" options={{ title: 'Splash', href: null }} />
+          <Tabs.Screen
+            name="ai-chat"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'OMW AI',
+              href: '/ai-chat',
+            }}
+          />
+          <Tabs.Screen
+            name="settings"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'Settings',
+              href: '/settings',
+            }}
+          />
+          <Tabs.Screen
+            name="user/[id]"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'User',
+              href: null,
+            }}
+          />
+          <Tabs.Screen
+            name="splash"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'Splash',
+              href: null,
+            }}
+          />
           {/* Using as workaround to initialRouteName redirect */}
-          <Tabs.Screen name="index" options={{ title: 'Index', href: null }} />
+          <Tabs.Screen
+            name="index"
+            options={{
+              tabBarLabelStyle: { fontFamily: 'Poppins_500Medium' },
+              title: 'Index',
+              href: null,
+            }}
+          />
         </Tabs>
       </ThemeProvider>
     </Provider>

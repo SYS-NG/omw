@@ -88,7 +88,7 @@ export function SettingsScreen() {
             Settings
           </H2>
           {/* Account */}
-          <Text fontSize={'$1'} color={'darkgray'} pt={20} pb={5} pl={20}>
+          <Text fontFamily={ 'Poppins_400Regular'} fontSize={'$1'} color={'darkgray'} pt={20} pb={5} pl={20}>
             Account
           </Text>
           <XGroup borderRadius={0} orientation="vertical">
@@ -103,7 +103,7 @@ export function SettingsScreen() {
                 spaceFlex
                 textAlign="left"
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Profile
                 </Text>
               </Button>
@@ -117,14 +117,14 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={WalletCards}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Payment Methods
                 </Text>
               </Button>
             </XGroup.Item>
           </XGroup>
           {/* Notification */}
-          <Text fontSize={'$1'} color={'darkgray'} paddingTop={20} pb={5} pl={20}>
+          <Text fontFamily={ 'Poppins_400Regular'}  fontSize={'$1'} color={'darkgray'} paddingTop={20} pb={5} pl={20}>
             Notification
           </Text>
           <XGroup borderRadius={0} orientation="vertical">
@@ -137,7 +137,7 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={Smartphone}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Push Notifications
                 </Text>
               </Button>
@@ -151,14 +151,14 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={Mail}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Email
                 </Text>
               </Button>
             </XGroup.Item>
           </XGroup>
           {/* Support */}
-          <Text fontSize={'$1'} color={'darkgray'} paddingTop={20} pb={5} pl={20}>
+          <Text fontFamily={ 'Poppins_400Regular'} fontSize={'$1'} color={'darkgray'} paddingTop={20} pb={5} pl={20}>
             Support
           </Text>
           <XGroup borderRadius={0} orientation="vertical">
@@ -171,7 +171,7 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={UserCog}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Contact
                 </Text>
               </Button>
@@ -185,7 +185,7 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={HelpCircle}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Help
                 </Text>
               </Button>
@@ -199,7 +199,7 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={BookText}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Terms of Service
                 </Text>
               </Button>
@@ -213,7 +213,7 @@ export function SettingsScreen() {
                 iconAfter={ChevronRight}
                 icon={Lock}
               >
-                <Text fontWeight={'500'} fontSize={'$4'} w={'85%'}>
+                <Text fontFamily={ 'Poppins_500Medium'} fontWeight={'500'} fontSize={'$4'} w={'85%'}>
                   Privacy Policy
                 </Text>
               </Button>
@@ -229,6 +229,7 @@ export function SettingsScreen() {
           bottom={10}
           fontStyle="italic"
           selectable={false}
+          fontFamily={ 'Poppins_500Medium'} 
         >
           Made with{' '}
           <Heart color={'red'} fill={'red'} />{' '}

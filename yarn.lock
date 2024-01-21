@@ -2779,6 +2779,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo-google-fonts/poppins@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@expo-google-fonts/poppins@npm:0.2.3"
+  checksum: 7a9468ce14027205adb442f1f19cc6eae0d0289b82fb2b729cc410b87f5a0d9ca201b70a7ae3ccaa9ea306b37cc12e76f9289a99d6ce02f0d6b10ecc1c3f2f92
+  languageName: node
+  linkType: hard
+
 "@expo/bunyan@npm:4.0.0, @expo/bunyan@npm:^4.0.0":
   version: 4.0.0
   resolution: "@expo/bunyan@npm:4.0.0"
@@ -15447,6 +15454,7 @@ __metadata:
   resolution: "omw-app@workspace:."
   dependencies:
     "@babel/runtime": "npm:^7.18.9"
+    "@expo-google-fonts/poppins": "npm:^0.2.3"
     "@manypkg/cli": "npm:^0.19.1"
     axios: "npm:^1.6.5"
     check-dependency-version-consistency: "npm:^3.0.3"

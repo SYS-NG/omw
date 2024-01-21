@@ -4,7 +4,7 @@ import { DarkTheme, DefaultTheme } from '@react-navigation/native'
 import { useRouter } from 'solito/router'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { Input, Button, H2, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar } from '@my/ui'
+import { Input, Button, H2, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar, Spacer, View, Stack } from '@my/ui'
 import { ChevronRight, Search, X } from '@tamagui/lucide-icons'
 
 export type Therapist = {
@@ -15,6 +15,7 @@ export type Therapist = {
   email: string
   consultation_fee: number
   dttm_joined: Date
+  tags: string[]
 }
 
 export function TherapistScreen() {
@@ -57,6 +58,7 @@ export function TherapistScreen() {
         phone_number: '9801329123',
         consultation_fee: 150,
         email: 'test@email.com',
+        tags: ['Vancouver', 'Online', 'In-Person', 'Call', 'LGBTQ+']
       },
       {
         id: 2,
@@ -66,6 +68,7 @@ export function TherapistScreen() {
         phone_number: '4149843192',
         consultation_fee: 250,
         email: 'test@email.com',
+        tags: ['Vancouver', 'Online', 'In-Person', 'Call', 'LGBTQ+']
       },
       {
         id: 3,
@@ -75,6 +78,7 @@ export function TherapistScreen() {
         phone_number: '7781263912',
         consultation_fee: 90,
         email: 'test@email.com',
+        tags: ['Vancouver', 'Online', 'In-Person', 'Call', 'LGBTQ+']
       },
       {
         id: 4,
@@ -84,6 +88,7 @@ export function TherapistScreen() {
         phone_number: '7781263912',
         consultation_fee: 110,
         email: 'test@email.com',
+        tags: ['Vancouver', 'Online', 'In-Person', 'Call', 'LGBTQ+']
       },
       {
         id: 5,
@@ -93,6 +98,7 @@ export function TherapistScreen() {
         phone_number: '7781263912',
         consultation_fee: 50,
         email: 'test@email.com',
+        tags: ['Vancouver', 'Online', 'In-Person', 'Call', 'LGBTQ+']
       }
     ])
   }
@@ -126,8 +132,8 @@ export function TherapistScreen() {
               onRefresh={onRefresh}
             />
           }
-          // stickyHeaderIndices={[0]}
-          // stickyHeaderHiddenOnScroll={true}
+        // stickyHeaderIndices={[0]}
+        // stickyHeaderHiddenOnScroll={true}
         >
           <XStack
             jc={'space-between'}
@@ -156,18 +162,18 @@ export function TherapistScreen() {
           <YStack p="$1" space>
             {searchText ? (
               filteredTherapists.length > 0 ? (
-                filteredTherapists.map((therapistObj, index) => {
+                filteredTherapists.map((therapistObj: Therapist, index) => {
                   return <TherapistListItem key={therapistObj.id} therapistObj={therapistObj} />
                 })
               ) : (
-                <Paragraph ta="center">Nothing found!</Paragraph>
+                <Paragraph fontFamily={'Poppins_400Regular'} ta="center">Nothing found!</Paragraph>
               )
             ) : allTherapists.length > 0 ? (
-              allTherapists.map((therapistObj, index) => {
+              allTherapists.map((therapistObj: Therapist, index) => {
                 return <TherapistListItem key={therapistObj.id} therapistObj={therapistObj} />
               })
             ) : (
-              <Paragraph ta="center">Nothing found!</Paragraph>
+              <Paragraph fontFamily={'Poppins_400Regular'} ta="center">Nothing found!</Paragraph>
             )}
           </YStack>
         </ScrollView>
@@ -209,28 +215,27 @@ const TherapistListItem = ({ therapistObj }) => {
           br={'$5'}
           pressTheme
           title={
-            <XStack width={'100%'} jc={'space-between'} alignItems={'center'}>
-              <Text fontSize={'$5'} fontWeight={'600'} userSelect="none">
-                {therapistObj.full_name}
-              </Text>
-              <ChevronRight />
-            </XStack>
+            <Text fontFamily={'Poppins_500Medium'} fontSize={'$5'} userSelect="none">
+              {therapistObj.full_name}
+            </Text>
           }
           subTitle={
             <>
-              <Text color={'$color.gray10Dark'}>
+              <Text fontFamily={'Poppins_300Light'} color={'$color.gray10Dark'}>
                 {therapistObj.phone_number}
               </Text>
-              <Text color={'$color.gray10Dark'}>
+              <Text fontFamily={'Poppins_300Light'} color={'$color.gray10Dark'}>
                 {therapistObj.dttm_joined.toDateString()}
               </Text>
+              <Text fontFamily={'Poppins_300Light'} userSelect="text" color={'$color.gray10Dark'}>
+                {therapistObj.email}
+              </Text>
+              <Spacer />
               <XStack jc={'space-between'} alignItems={'center'}>
-                <Text userSelect="text" color={'$color.gray10Dark'}>
-                  {therapistObj.email}
-                </Text>
-                <Text fontSize={'$5'} fontWeight={'600'} userSelect="none">
+                <Text fontFamily={'Poppins_300Light'} fontSize={'$5'} fontWeight={'600'} userSelect="none">
                   ${therapistObj.consultation_fee}
                 </Text>
+                <ChevronRight />
               </XStack>
             </>
           }
