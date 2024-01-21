@@ -39,7 +39,6 @@
     "prettier": "^2.7.1",
     "react-native-gifted-chat": "^2.4.0",
     "react-native-image-picker": "^7.1.0",
-    "react-router-native": "^6.21.3",
     "react-native-progress-circle": "^2.1.0",
     "turbo": "^1.10.3",
     "typescript": "^5.3.3"

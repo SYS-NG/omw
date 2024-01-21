@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useColorScheme, RefreshControl, Image} from 'react-native'
+import { useColorScheme, RefreshControl, Image } from 'react-native'
 import CheckBox from 'expo-checkbox'
 import { DarkTheme, DefaultTheme } from '@react-navigation/native'
 import { useRouter } from 'solito/router'
@@ -7,7 +7,7 @@ import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-cont
 
 import { Input, Button, H2, H3, H4, H5, H6, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar, View } from '@my/ui'
 import { ChevronUp, ChevronDown, Search, TrendingUp, X } from '@tamagui/lucide-icons'
-import { SvgXml, Svg} from 'react-native-svg';
+import { SvgXml, Svg } from 'react-native-svg';
 import ProgressCircle from 'react-native-progress-circle'
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
 
@@ -19,7 +19,7 @@ export type Task = {
 
 export function TaskScreen() {
 
-  const [numSelected, setNumSelected]    = useState(0)
+  const [numSelected, setNumSelected] = useState(0)
   const [goalSelected, setGoalSelection] = useState(false)
   const [compSelected, setCompSelection] = useState(false)
   const [ongoSelected, setOngoSelection] = useState(false)
@@ -34,15 +34,17 @@ export function TaskScreen() {
   const insets = useSafeAreaInsets()
 
   const getCompTasks = () => {
+    const compTasks = allTasks.filter((task) => Boolean(task.done))
     setCompTasks(
-      allTasks.filter((task) => Boolean(task.done))
+      compTasks
     )
   }
 
 
   const getOngoTasks = () => {
+    const ongoingTasks = allTasks.filter((task) => Boolean(!task.done))
     setOngoTasks(
-      allTasks.filter((task) => Boolean(!task.done))
+      ongoingTasks
     )
   }
 
@@ -74,25 +76,28 @@ export function TaskScreen() {
         done: false
       },
     ])
-    getCompTasks();
-    getOngoTasks();
   }
 
   const percentTaskDone = () => {
     return Math.round(numSelected / allTasks.length * 100);
   }
- 
+
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     fetchAllTasks();
     setTimeout(() => {
       setRefreshing(false)
-    }, 2000)
+    }, 1000)
   }, [])
 
   useEffect(() => {
     fetchAllTasks();
   }, [])
+
+  useEffect(() => {
+    getCompTasks();
+    getOngoTasks();
+  }, [allTasks]);
 
   return (
     <SafeAreaProvider>
@@ -111,8 +116,8 @@ export function TaskScreen() {
               onRefresh={onRefresh}
             />
           }
-          // stickyHeaderIndices={[0]}
-          // stickyHeaderHiddenOnScroll={true}
+        // stickyHeaderIndices={[0]}
+        // stickyHeaderHiddenOnScroll={true}
         >
           <YStack >
             <XStack
@@ -155,9 +160,9 @@ export function TaskScreen() {
           </YStack>
 
           <YStack p="$3" space>
-            <XStack style={{ backgroundColor:"#e6e6e6", width:"95%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"5%"}} jc={'space-between'} alignItems={'center'} onPress={() => handleGoalPress()}>
+            <XStack style={{ backgroundColor: "#e6e6e6", width: "95%", marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto", padding: "5%" }} jc={'space-between'} alignItems={'center'} onPress={() => handleGoalPress()}>
               <Text fontSize={'$7'} fontWeight={'700'}>Managing your anger</Text>
-              {goalSelected ? (<ChevronUp/>) : (<ChevronDown/>)}
+              {goalSelected ? (<ChevronUp />) : (<ChevronDown />)}
             </XStack>
             {goalSelected && allTasks.length > 0 ? (
               allTasks.map((taskObj, index) => {
@@ -171,18 +176,18 @@ export function TaskScreen() {
           <YStack p="$3" space>
 
             <Text fontSize={'$7'} fontWeight={'700'}>Task Overview</Text>
-            
+
             <YStack p="$3" space >
-              <XStack style={{ width:"100%", margin:"0", paddingLeft:"1%", paddingRight:"1%"}} jc={'space-between'} alignItems={'center'} onPress={() => handleOngoPress()}>
+              <XStack style={{ width: "100%", margin: "0", paddingLeft: "1%", paddingRight: "1%" }} jc={'space-between'} alignItems={'center'} onPress={() => handleOngoPress()}>
                 <Text fontSize={'$6'} fontWeight={'400'}>Ongoing</Text>
                 <XStack alignContent='center'>
                   <Text fontSize={'$6'} paddingRight="2%">{ongoTasks.length}</Text>
-                  {ongoSelected? (<ChevronUp/>) : (<ChevronDown/>)}
+                  {ongoSelected ? (<ChevronUp />) : (<ChevronDown />)}
                 </XStack>
               </XStack>
               {ongoSelected && allTasks.length > 0 ? (
                 ongoTasks.map((taskObj, index) => {
-                  return <TaskListNoCheckItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks}/>
+                  return <TaskListNoCheckItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks} />
                 })
               ) : (
                 <></>
@@ -190,16 +195,16 @@ export function TaskScreen() {
             </YStack>
 
             <YStack p="$3" space paddingTop="0" marginTop="0">
-              <XStack style={{ width:"100%", margin:"0", paddingLeft:"1%", paddingRight:"1%"}} jc={'space-between'} alignItems={'center'} onPress={() => handleCompPress()}>
+              <XStack style={{ width: "100%", margin: "0", paddingLeft: "1%", paddingRight: "1%" }} jc={'space-between'} alignItems={'center'} onPress={() => handleCompPress()}>
                 <Text fontSize={'$6'} fontWeight={'400'}>Completed</Text>
                 <XStack alignContent='center'>
                   <Text fontSize={'$6'} paddingRight="2%">{compTasks.length}</Text>
-                  {compSelected ? (<ChevronUp/>) : (<ChevronDown/>)}
+                  {compSelected ? (<ChevronUp />) : (<ChevronDown />)}
                 </XStack>
               </XStack>
               {compSelected && allTasks.length > 0 ? (
                 compTasks.map((taskObj, index) => {
-                  return <TaskListNoCheckItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks}/>
+                  return <TaskListNoCheckItem key={taskObj.id} taskObj={taskObj} numSelected={numSelected} setNumSelected={setNumSelected} getCompTasks={getCompTasks} getOngoTasks={getOngoTasks} />
                 })
               ) : (
                 <></>
@@ -211,14 +216,14 @@ export function TaskScreen() {
     </SafeAreaProvider>
   )
 }
-const TaskListNoCheckItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks}) => {
+const TaskListNoCheckItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks }) => {
   const [isSelected, setSelection] = useState(taskObj.done)
   const color = isSelected ? '#99ccff' : '#e6e6e6';
 
   return (
     <YGroup>
       <YGroup.Item>
-        <XStack style={{ backgroundColor:color, width:"92%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"3.5%"}} jc={'space-between'} alignItems={'center'}>
+        <XStack style={{ backgroundColor: color, width: "92%", marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto", padding: "3.5%" }} jc={'space-between'} alignItems={'center'}>
           <Text fontSize={'$5'} fontWeight={'600'}>
             {taskObj.task}
           </Text>
@@ -228,15 +233,14 @@ const TaskListNoCheckItem = ({ taskObj, numSelected, setNumSelected, getCompTask
   )
 }
 
-const TaskListItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks}) => {
+const TaskListItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks }) => {
   const [isSelected, setSelection] = useState(taskObj.done)
 
 
   const handleCheckSelect = (newValue, taskObj) => {
     taskObj.done = newValue;
     getCompTasks();
-    getOngoTasks();    
-
+    getOngoTasks();
 
     setSelection(newValue);
     if (newValue) {
@@ -251,7 +255,7 @@ const TaskListItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getO
   return (
     <YGroup>
       <YGroup.Item>
-        <XStack style={{ backgroundColor:color, width:"92%", marginTop:"0", marginBottom:"0", marginLeft:"auto", marginRight:"auto", padding:"3.5%"}} jc={'space-between'} alignItems={'center'}>
+        <XStack style={{ backgroundColor: color, width: "92%", marginTop: "0", marginBottom: "0", marginLeft: "auto", marginRight: "auto", padding: "3.5%" }} jc={'space-between'} alignItems={'center'}>
           <Text fontSize={'$5'} fontWeight={'600'}>
             {taskObj.task}
           </Text>

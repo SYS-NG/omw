@@ -120,10 +120,10 @@ export function MoodScreen() {
               <Text ta="left">Hi, how are you feeling today?</Text>
             </YStack>
 
-            <XStack flex={1} space="$4" max-width={100}>
+            <XStack gap={'$4'} max-width={100}>
               {fetchAllMoods().map((mood) => (
                 <Button key={mood.id} theme="active" onPress={() => {setImageURI(mood.name)}}>
-                  <Stack space="$3" ai="center">
+                  <Stack ai="center">
                     <Text ta="center">{mood.name}</Text>
                   </Stack>
                 </Button>
@@ -151,7 +151,7 @@ export function MoodScreen() {
                   </XStack>
                 </Card.Header>
                 {fetchAllArticles().map((article) => (
-                  <Button size={'$8'} chromeless>
+                  <Button key={article.id} size={'$8'} chromeless>
                     <YStack space ai="center" jc='space-around'>
                       <Text ta="center" >{article.title}</Text>
                       <Text ta="right" >{article.content}</Text>
