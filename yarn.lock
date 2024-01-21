@@ -10376,6 +10376,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-checkbox@npm:~2.4.0":
+  version: 2.4.0
+  resolution: "expo-checkbox@npm:2.4.0"
+  checksum: bc58d8c6cb0190fa11c548c48f39715d20d536f2f15f21c08e5bfe756eb42d73e4650ad0e371cac0fef73bf92286a4546678b557833020f9ee0a6327cf85eb1f
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~14.4.2":
   version: 14.4.2
   resolution: "expo-constants@npm:14.4.2"
@@ -15444,6 +15451,7 @@ __metadata:
     axios: "npm:^1.6.5"
     check-dependency-version-consistency: "npm:^3.0.3"
     eslint: "npm:^8.21.0"
+    expo-checkbox: "npm:~2.4.0"
     node-gyp: "npm:^9.3.1"
     prettier: "npm:^2.7.1"
     react-native-gifted-chat: "npm:^2.4.0"
