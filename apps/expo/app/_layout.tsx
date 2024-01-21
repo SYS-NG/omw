@@ -6,6 +6,7 @@ import { SplashScreen } from 'expo-router'
 import { Tabs } from 'expo-router/tabs'
 import { useColorScheme } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { View } from '@my/ui'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -40,20 +41,14 @@ export default function HomeLayout() {
                 iconName = focused ? 'chatbox' : 'chatbox-outline'
               } else if (route.name === 'settings') {
                 iconName = focused ? 'ios-list' : 'ios-list-outline'
+              } else if (route.name === 'mood') {
+                iconName = focused ? 'add-circle' : 'add-circle-outline'
               }
               return (
                 <Ionicons
                   name={iconName}
                   size={size}
-                  color={
-                    scheme === 'dark'
-                      ? focused
-                        ? DefaultTheme.colors.background
-                        : DefaultTheme.colors.border
-                      : focused
-                      ? DarkTheme.colors.background
-                      : DefaultTheme.colors.border
-                  }
+                  color={focused ? '#EF4444' : DefaultTheme.colors.border}
                 />
               )
             },
@@ -63,6 +58,13 @@ export default function HomeLayout() {
         >
           <Tabs.Screen name="task" options={{ title: 'Tasks', href: '/task' }} />
           <Tabs.Screen name="therapist" options={{ title: 'Therapist', href: '/therapist' }} />
+          <Tabs.Screen
+            name="mood"
+            options={{
+              title: 'Mood',
+              href: '/mood',
+            }}
+          />
           <Tabs.Screen name="ai-chat" options={{ title: 'OMW AI', href: '/ai-chat' }} />
           <Tabs.Screen name="settings" options={{ title: 'Settings', href: '/settings' }} />
           <Tabs.Screen name="user/[id]" options={{ title: 'User', href: null }} />
