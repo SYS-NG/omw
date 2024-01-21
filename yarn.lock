@@ -4241,6 +4241,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remix-run/router@npm:1.14.2":
+  version: 1.14.2
+  resolution: "@remix-run/router@npm:1.14.2"
+  checksum: 422844e88b985f1e287301b302c6cf8169c9eea792f80d40464f97b25393bb2e697228ebd7a7b61444d5a51c5873c4a637aad20acde5886a5caf62e833c5ceee
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.5.0":
   version: 1.5.0
   resolution: "@remix-run/router@npm:1.5.0"
@@ -6244,6 +6251,13 @@ __metadata:
     "@typescript-eslint/types": "npm:5.59.1"
     eslint-visitor-keys: "npm:^3.3.0"
   checksum: 2183e75e7acacc78d27055e9d3bed25c59572f1a6e69f43f5a24a16e9644d4e84dba9478a28555cab215046fe16059affc8903c3d4e1159320cdfe0bfd45ef9a
+  languageName: node
+  linkType: hard
+
+"@ungap/url-search-params@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "@ungap/url-search-params@npm:0.2.2"
+  checksum: c98294dec6549b746643a318830b8835d0dc7b4193eaa8276e638a14c9d1d261023ddd6842b135d4ad68d18ba615a3cb61052247cf41ef7bc9c591799efe609e
   languageName: node
   linkType: hard
 
@@ -15464,6 +15478,7 @@ __metadata:
     prettier: "npm:^2.7.1"
     react-native-gifted-chat: "npm:^2.4.0"
     react-native-image-picker: "npm:^7.1.0"
+    react-router-native: "npm:^6.21.3"
     react-native-progress-circle: "npm:^2.1.0"
     turbo: "npm:^1.10.3"
     typescript: "npm:^5.3.3"
@@ -16987,6 +17002,30 @@ __metadata:
     "@types/react":
       optional: true
   checksum: f0646ac384ce3852d1f41e30a9f9e251b11cf3b430d1d114c937c8fa7f90a895c06378d0d6b6ff0b2d00cbccf15e845921944fd6074ae67a0fb347a718106d88
+  languageName: node
+  linkType: hard
+
+"react-router-native@npm:^6.21.3":
+  version: 6.21.3
+  resolution: "react-router-native@npm:6.21.3"
+  dependencies:
+    "@ungap/url-search-params": "npm:^0.2.2"
+    react-router: "npm:6.21.3"
+  peerDependencies:
+    react: ">=16.8"
+    react-native: ">=0.44"
+  checksum: 02cea66c8c665febfe4a042f614c573eb8fd46be19aacaeff8105836d1ac36c04620114b2cccb811ec700771f134fdf24a4d64420464bf070faaeccc52743cd4
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.21.3":
+  version: 6.21.3
+  resolution: "react-router@npm:6.21.3"
+  dependencies:
+    "@remix-run/router": "npm:1.14.2"
+  peerDependencies:
+    react: ">=16.8"
+  checksum: 3d5107cfdb440519d84e6ad6d95454e3bf41ec97677b95f7b2a7f281f8ddf191b765cf1b599ead951f3cd33ed4429f140590d74a01cfdf835dc2f812023a978a
   languageName: node
   linkType: hard
 
