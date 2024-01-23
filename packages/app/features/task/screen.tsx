@@ -1,15 +1,15 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useColorScheme, RefreshControl, Image } from 'react-native'
+import { useCallback, useEffect, useState } from 'react'
+import { RefreshControl, useColorScheme } from 'react-native'
 import CheckBox from 'expo-checkbox'
 import { DarkTheme, DefaultTheme } from '@react-navigation/native'
-import { useRouter } from 'solito/router'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { Input, Button, H2, H3, H4, H5, H6, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar, View } from '@my/ui'
-import { ChevronUp, ChevronDown, Search, TrendingUp, X } from '@tamagui/lucide-icons'
-import { SvgXml, Svg } from 'react-native-svg';
+import { H2, H3, H4, Paragraph, ScrollView, XStack, YStack, ListItem, Text, YGroup, Avatar, View } from '@my/ui'
+import { ChevronUp, ChevronDown, TrendingUp } from '@tamagui/lucide-icons'
 import ProgressCircle from 'react-native-progress-circle'
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
+
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 
 export type Task = {
   id: number
@@ -28,9 +28,7 @@ export function TaskScreen() {
   const [compTasks, setCompTasks] = useState<Task[]>([])
   const [ongoTasks, setOngoTasks] = useState<Task[]>([])
 
-  const [searchText, setSearchText] = useState('')
   const [refreshing, setRefreshing] = useState(false)
-  const scheme = useColorScheme()
   const insets = useSafeAreaInsets()
 
   const getCompTasks = () => {
@@ -100,6 +98,10 @@ export function TaskScreen() {
     getOngoTasks();
   }, [allTasks]);
 
+  const scheme      = useColorScheme();
+  const bubbleColor = scheme === 'dark' ? '#1a1a1a' : 'e6e6e6'
+
+
   return (
     <SafeAreaProvider>
       <YStack
@@ -154,6 +156,7 @@ export function TaskScreen() {
                 radius={35}
                 borderWidth={8}
                 color="#3399ff"
+                bgColor={bubbleColor}
               >
                 <Text>{percentTaskDone()}</Text>
               </ProgressCircle>
@@ -161,7 +164,7 @@ export function TaskScreen() {
           </YStack>
 
           <YStack p="$3" space>
-            <XStack bg={"#e6e6e6"} p={'5%'} jc={'space-between'} onPress={() => handleGoalPress()}>
+            <XStack bg={bubbleColor} p={'5%'} jc={'space-between'} onPress={() => handleGoalPress()}>
               <Text fontSize={'$7'} fontWeight={'700'}>Managing your anger</Text>
               {goalSelected ? (<ChevronUp />) : (<ChevronDown />)}
             </XStack>
@@ -195,7 +198,7 @@ export function TaskScreen() {
               )}
             </YStack>
 
-            <YStack p="$3" gap>
+            <YStack p="$3" space>
               <XStack paddingEnd={'1%'} paddingStart={'1%'} jc={'space-between'} onPress={() => handleCompPress()}>
                 <Text fontSize={'$6'} fontWeight={'400'}>Completed</Text>
                 <XStack alignContent='center'>
@@ -218,7 +221,9 @@ export function TaskScreen() {
   )
 }
 const TaskListNoCheckItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getOngoTasks }) => {
-  const color = taskObj.done ? '#99ccff' : '#e6e6e6';
+  const scheme      = useColorScheme();
+  const onGoColor = scheme === 'dark' ? '#1a1a1a' : 'e6e6e6'
+  const color = taskObj.done ? '#99ccff' : onGoColor;
 
   return (
     <YGroup>
@@ -250,7 +255,10 @@ const TaskListItem = ({ taskObj, numSelected, setNumSelected, getCompTasks, getO
     }
 
   }
-  const color = isSelected ? '#99ccff' : '#e6e6e6';
+  const scheme      = useColorScheme();
+  const onGoColor = scheme === 'dark' ? '#1a1a1a' : 'e6e6e6'
+  
+  const color = isSelected ? '#99ccff' : onGoColor; 
 
   return (
     <YGroup>
