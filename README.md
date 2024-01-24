@@ -1,95 +1,80 @@
-# Tamagui + Solito + Next + Expo Monorepo
+# OMW: On My Way to Better Health
 
-```sh
-npm create tamagui
-```
+➡️ **Checkout Our Submitted Project on DevPost:** [OMW Demo](https://devpost.com/software/omw?ref_content=user-portfolio&ref_feature=in_progress)
 
-## 🔦 About
+🚀 Welcome to OMW, a cutting-edge mobile application developed for the nwHacks Hackathon. OMW, short for "On My Way," is not just an app; it's a project dedicated to guiding users on their journey to better health, OMW empowers mental health patients through advanced features such as mood tracking, task progression, therapist location, and continuous support via an AI chatbot. The motto, "On my way to better health," encapsulates the app's mission to empower users on their path to improved mental health.
 
-This monorepo is a starter for an Expo + Next.js + Tamagui + Solito app.
+This repository serves as a proof-of-concept, showcasing the potential functionality of OMW.
+
+## Features
+
+- **Mood and Task Tracking:** Visualize your daily mood and task progression, fostering self-awareness and motivation.
+
+- **Therapist Locator:** Discover and connect with local therapists effortlessly, promoting accessibility to mental health support.
+
+- **AI Chatbot Support:** Access 24-hour support, offering guidance, encouragement, and a listening ear whenever needed.
+
+## How It Works
+
+- **Mood and Task Tracking:** Input your daily mood and task progress within the app, visualizing your journey over time.
+
+- **Therapist Locator:** Utilize location-based services to find nearby therapists, ensuring easy access to professional support.
+
+- **AI Chatbot Support:** Experience continuous support with the AI chatbot, offering guidance at any hour.
+
+## Getting Started Locally
+
+Follow these steps to dive into the technical aspects of OMW:
+
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/SYS-NG/OMW.git
+    ```
+
+2. **Navigate to the project directory:**
+    ```bash
+    cd OMW
+    ```
+
+3. **Install dependencies:**
+    ```bash
+    yarn
+    ```
+
+4. **Start the development server for Expo Go:**
+
+   For Expo Go Mobile
+    ```bash
+    yarn native
+    ```
+   For Web Development
+   ```bash
+   yarn web
+   ```
+    
+
+## Technologies Used
+
+- **React Native:** Framework for building the mobile application.
+- **Expo:** Toolkit for building React Native applications quickly.
+- **Tamagui:** Design system for consistent and visually appealing UI.
+- **Solito:** Cross-platform navigation for a seamless user experience.
+- **Next:** Web version development for broader accessibility
+
+## Team
+
+Designer
+- Yewon Choi [@yewoncc](https://github.com/yewoncc)
+
+Mobile App Developer
+- Harshdeep Singh [@harshdeeply](https://github.com/harshdeeply)
+- Kale Fordham [@KaleF07](https://github.com/KaleF07)
+- Steven Ng [@SYS-NG](https://github.com/SYS-NG)
+
+## Acknowledgments
+
+Thanks to nwHacks for providing the platform to develop OMW.
+
+Special thanks to the mental health community for their ongoing support and resources. Together, we can make a difference
 
 Many thanks to [@FernandoTheRojo](https://twitter.com/fernandotherojo) for the Solito starter monorepo which this was forked from. Check out his [talk about using expo + next together at Next.js Conf 2021](https://www.youtube.com/watch?v=0lnbdRweJtA).
-
-## 📦 Included packages
-
-- [Tamagui](https://tamagui.dev) 🪄
-- [solito](https://solito.dev) for cross-platform navigation
-- Expo SDK
-- Next.js
-- Expo Router
-
-## 🗂 Folder layout
-
-The main apps are:
-
-- `expo` (native)
-- `next` (web)
-
-- `packages` shared packages across apps
-  - `ui` includes your custom UI kit that will be optimized by Tamagui
-  - `app` you'll be importing most files from `app/`
-    - `features` (don't use a `screens` folder. organize by feature.)
-    - `provider` (all the providers that wrap the app, and some no-ops for Web.)
-
-You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
-
-## 🏁 Start the app
-
-- Install dependencies: `yarn`
-
-- Next.js local dev: `yarn web`
-
-To run with optimizer on in dev mode (just for testing, it's faster to leave it off): `yarn web:extract`. To build for production `yarn web:prod`.
-
-To see debug output to verify the compiler, add `// debug` as a comment to the top of any file.
-
-- Expo local dev: `yarn native`
-
-## UI Kit
-
-Note we're following the [design systems guide](https://tamagui.dev/docs/guides/design-systems) and creating our own package for components.
-
-See `packages/ui` named `@my/ui` for how this works.
-
-## 🆕 Add new dependencies
-
-### Pure JS dependencies
-
-If you're installing a JavaScript-only dependency that will be used across platforms, install it in `packages/app`:
-
-```sh
-cd packages/app
-yarn add date-fns
-cd ../..
-yarn
-```
-
-### Native dependencies
-
-If you're installing a library with any native code, you must install it in `expo`:
-
-```sh
-cd apps/expo
-yarn add react-native-reanimated
-cd ..
-yarn
-```
-
-## Update new dependencies
-
-### Pure JS dependencies
-
-```sh
-yarn upgrade-interactive
-```
-
-You can also install the native library inside of `packages/app` if you want to get autoimport for that package inside of the `app` folder. However, you need to be careful and install the _exact_ same version in both packages. If the versions mismatch at all, you'll potentially get terrible bugs. This is a classic monorepo issue. I use `lerna-update-wizard` to help with this (you don't need to use Lerna to use that lib).
-
-You may potentially want to have the native module transpiled for the next app. If you get error messages with `Cannot use import statement outside a module`, you may need to use `transpilePackages` in your `next.config.js` and add the module to the array there.
-
-### Deploying to Vercel
-
-- Root: `apps/next`
-- Install command to be `yarn set version stable && yarn install`
-- Build command: leave default setting
-- Output dir: leave default setting
